@@ -18,13 +18,14 @@ jobs:
           docker build -t my-go-app docker/go
           docker build -t my-nextjs-app docker/nextjs
           docker build -t my-wordpress-site docker/wordpress
-          docker tag my-go-app myusername/my-go-app:latest
-          docker tag my-nextjs-app myusername/my-nextjs-app:latest
-          docker tag my-wordpress-site myusername/my-wordpress-site:latest
+          docker tag my-go-app roshniyadav/my-go-app:latest
+          docker tag my-nextjs-app roshniyadav/my-nextjs-app:latest
+          docker tag my-wordpress-site roshniyadav/my-wordpress-site:latest
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-          docker push myusername/my-go-app:latest
-          docker push myusername/my-nextjs-app:latest
-          docker push myusername/my-wordpress-site:latest
+          docker push roshniyadav/my-go-app:latest
+          docker push roshniyadav/my-nextjs-app:latest
+          docker push roshniyadav/my-wordpress-site:latest
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
