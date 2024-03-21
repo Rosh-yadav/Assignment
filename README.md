@@ -8,8 +8,8 @@ Welcome to the  Assignment  repository! This repository contains components for 
 - Create a new public GitHub repository.
 - Initialize separate repositories for each component:
   - [[Go Component Repository] https://github.com/Rosh-yadav/Go-Component.git
-  - [[Next.js Component Repository](https://github.com/your-username/nextjs-component)](https://github.com/Rosh-yadav/Next.js-Component.git)
-  - [[WordPress Component Repository](https://github.com/your-username/wordpress-component)](https://github.com/Rosh-yadav/WordPress-Component.git)
+  - [[Next.js Component Repository] https://github.com/Rosh-yadav/Next.js-Component.git
+  - [[WordPress Component Repository] https://github.com/Rosh-yadav/WordPress-Component.git
 
 ### Continuous Integration (CI)
 
