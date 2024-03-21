@@ -1,5 +1,4 @@
-# .github/workflows/go-ci.yml
-name: Go CI
+name: Go CI/CD
 
 on:
   push:
@@ -32,4 +31,21 @@ jobs:
       - name: Build Go binary
         run: go build -o app
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'  # Only deploy on main branch
 
+    steps:
+      - name: Copy artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: go-app
+          path: ./app
+
+      - name: Deploy to staging
+        uses: actions/deploy@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          provider: heroku
+          app: your-go-app-staging

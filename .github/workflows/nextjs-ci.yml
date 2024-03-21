@@ -1,5 +1,4 @@
-# .github/workflows/nextjs-ci.yml
-name: Next.js CI
+name: Next.js CI/CD
 
 on:
   push:
@@ -12,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -26,5 +25,21 @@ jobs:
       - name: Run linting
         run: npm run lint
 
-      - name: Run tests
+      - name: Run unit tests
         run: npm test
+
+      - name: Build Next.js app
+        run: npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'  # Only deploy on main branch
+
+    steps:
+      - name: Deploy to staging
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: ./build
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,4 @@
-# .github/workflows/wordpress-ci.yml
-name: WordPress CI
+name: WordPress CI/CD
 
 on:
   push:
@@ -12,11 +11,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Composer dependencies
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Install dependencies
         run: composer install
 
       - name: Run PHPCS
-        run: ./vendor/bin/phpcs --standard=WordPress .
+        run: vendor/bin/phpcs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'  # Only deploy on main branch
+
+    steps:
+      - name: Deploy to staging
+        uses: peaceiris/actions-wordpress@v2
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-public-key: ${{ secrets.SSH_PUBLIC_KEY }}
+          repo-url: git@github.com:your-org/your-wordpress-repo.git
+          branch: main
+          deploy-path: /var/www/html/wp-content/themes/your-theme
