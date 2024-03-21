@@ -7,9 +7,9 @@ Welcome to the  Assignment  repository! This repository contains components for 
 
 - Create a new public GitHub repository.
 - Initialize separate repositories for each component:
-  - [[Go Component Repository] https://github.com/Rosh-yadav/Go-Component.git
-  - [[Next.js Component Repository] https://github.com/Rosh-yadav/Next.js-Component.git
-  - [[WordPress Component Repository] https://github.com/Rosh-yadav/WordPress-Component.git
+  - [Go Component Repository] https://github.com/Rosh-yadav/Go-Component.git
+  - [Next.js Component Repository] https://github.com/Rosh-yadav/Next.js-Component.git
+  - [WordPress Component Repository] https://github.com/Rosh-yadav/WordPress-Component.git
 
 ### Continuous Integration (CI)
 
@@ -24,7 +24,7 @@ Welcome to the  Assignment  repository! This repository contains components for 
 
 - Dockerize each application by creating Dockerfiles.
 - Push Docker images to a container registry:
-  - Example Docker Registry: `docker.pkg.github.com/your-username/example-application`
+  - Example Docker Registry: [`docker.pkg.github.com/your-username/example-application`](https://hub.docker.com/repository/docker/roshniyadav/application/general)     
 
 ### Orchestration
 
