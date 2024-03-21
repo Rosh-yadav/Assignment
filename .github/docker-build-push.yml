@@ -1,0 +1,30 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker images
+        run: |
+          docker build -t my-go-app docker/go
+          docker build -t my-nextjs-app docker/nextjs
+          docker build -t my-wordpress-site docker/wordpress
+          docker tag my-go-app myusername/my-go-app:latest
+          docker tag my-nextjs-app myusername/my-nextjs-app:latest
+          docker tag my-wordpress-site myusername/my-wordpress-site:latest
+          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+          docker push myusername/my-go-app:latest
+          docker push myusername/my-nextjs-app:latest
+          docker push myusername/my-wordpress-site:latest
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
